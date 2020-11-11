@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for i in `cat php56.list`; do
+    test -d /usr/local/poudriere/ports/default/${i} && rm -r /usr/local/poudriere/ports/default/$i
+done

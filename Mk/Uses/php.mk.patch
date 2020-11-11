@@ -1,0 +1,37 @@
+--- php.mk.orig	2020-11-10 17:44:18.048254000 +0300
++++ php.mk	2020-11-10 17:39:07.462120000 +0300
+@@ -110,7 +110,7 @@
+ 
+ PHPBASE?=	${LOCALBASE}
+ 
+-_ALL_PHP_VERSIONS=	72 73 74 80
++_ALL_PHP_VERSIONS=	56i 72 73 74 80
+ 
+ # Make the already installed PHP the default one.
+ .  if exists(${PHPBASE}/etc/php.conf)
+@@ -190,6 +190,9 @@
+ .    elif ${PHP_VER} == 72
+ PHP_EXT_DIR=   20170718
+ PHP_EXT_INC=    pcre spl
++.    elif ${PHP_VER} == 56i
++PHP_EXT_DIR=   20131226
++PHP_EXT_INC=    pcre spl
+ .    else
+ # (rene) default to DEFAULT_VERSIONS
+ PHP_EXT_DIR=	20170718
+@@ -382,6 +385,7 @@
+ 		sockets spl sqlite3 sysvmsg sysvsem sysvshm \
+ 		tidy tokenizer xml xmlreader xmlwriter xsl zip zlib
+ # version specific components
++_USE_PHP_VER56i=${_USE_PHP_ALL} mssql mysql sybase_ct
+ _USE_PHP_VER72=	${_USE_PHP_ALL} interbase pdf recode sodium xmlrpc wddx
+ _USE_PHP_VER73=	${_USE_PHP_ALL} interbase pdf recode sodium xmlrpc wddx
+ _USE_PHP_VER74=	${_USE_PHP_ALL} ffi pdf sodium xmlrpc
+@@ -418,6 +422,7 @@
+ memcache_DEPENDS=	databases/pecl-memcache@${PHP_FLAVOR}
+ memcached_DEPENDS=	databases/pecl-memcached@${PHP_FLAVOR}
+ mssql_DEPENDS=	databases/php${PHP_VER}-mssql
++mysql_DEPENDS=	databases/php${PHP_VER}-mysql
+ mysqli_DEPENDS=	databases/php${PHP_VER}-mysqli
+ odbc_DEPENDS=	databases/php${PHP_VER}-odbc
+ opcache_DEPENDS=	www/php${PHP_VER}-opcache
